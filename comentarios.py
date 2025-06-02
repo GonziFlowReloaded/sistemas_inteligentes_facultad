@@ -78,5 +78,9 @@ comentarios = [
   {
     "usuario": "la_sole_pesada",
     "comentario": "Dejen de robar y hagan algo de verdad. El barrio Esperanza está igual que hace 10 años."
+  },
+  {
+    "usuario": "juanceto01",
+    "comentario": "y esos auris de virgo momo?"
   }
 ]
