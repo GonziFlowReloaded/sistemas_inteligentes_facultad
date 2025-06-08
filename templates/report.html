@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reporte de Sentimientos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .gradient-header {
+        background: linear-gradient(90deg, #24292e, #57606a);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-gray-100 flex flex-col items-center">
+    <header class="w-full gradient-header text-white py-4 mb-8">
+      <h1 class="text-center text-2xl font-semibold">Reporte de {{ total }} Comentarios</h1>
+    </header>
+
+    <section class="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-6 mb-8">
+      <h2 class="text-xl font-semibold mb-4">Pedidos vs Reclamos</h2>
+      <canvas id="classChart"></canvas>
+    </section>
+
+    <section class="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-6">
+      <h2 class="text-xl font-semibold mb-4">Sentimientos de Descartados</h2>
+      <canvas id="sentimentChart"></canvas>
+    </section>
+
+    <script>
+      // Gráfico Pedido vs Reclamos
+      const classCtx = document.getElementById('classChart').getContext('2d');
+      new Chart(classCtx, {
+        type: 'bar',
+        data: {
+          labels: {{ class_labels | tojson }},
+          datasets: [{
+            label: 'Conteo',
+            data: {{ class_values | tojson }},
+            borderRadius: 8
+          }]
+        },
+        options: {
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+
+      // Gráfico Sentimientos
+      const sentCtx = document.getElementById('sentimentChart').getContext('2d');
+      new Chart(sentCtx, {
+        type: 'bar',
+        data: {
+          labels: {{ sentiment_labels | tojson }},
+          datasets: [{
+            label: 'Conteo',
+            data: {{ sentiment_values | tojson }},
+            borderRadius: 8
+          }]
+        },
+        options: {
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+    </script>
+  </body>
+</html>
